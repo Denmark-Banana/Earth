@@ -9,6 +9,6 @@ const userController = require('../controllers');
 
 router.get('/', userController.basicAPI);
 router.get('/test', userController.testAPI);
-router.post('/post_test', userController.postTestAPI);
+router.post('/test', userController.postTestAPI);
 
 module.exports = router;
