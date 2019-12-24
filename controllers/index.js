@@ -1,26 +1,26 @@
 function basicAPI (req, res) {
-  res.status(200).json(
-    {
-      "success" : true
-    }
-  )
+    res.status(200).json(
+        {
+            "success" : true
+        }
+    )
 }
 
 function testAPI (req, res) {
     res.status(200).json(
-      {
-        "message" : "test"
-      }
+        {
+            "message" : "test!"
+        }
     )
 }
 
 function postTestAPI (req, res) {
-  const user_message = req.body.message;
-  res.status(200).json(
-    {
-      "message": user_message
-    }
-  );
+    const user_message = req.body.message;
+    res.status(200).json(
+        {
+            "message": user_message
+        }
+    );
 }
 
 module.exports = {
