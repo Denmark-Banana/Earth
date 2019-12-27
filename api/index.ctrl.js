@@ -4,10 +4,20 @@ var path = require('path');
 var properties = propertiesReader('server.properties');
 
 function downloadAPI (req, res) {
+    var dir_loc = properties.get('dir.location');
+    var category = req.params.category;
+    var id = req.params.id;
+    var filetype = ".pdf";
 
-    var filePath = path.join(properties.get('file.location'),"/1/manual1-1.pdf");
+    var filePath = path.join(dir_loc, category, id, id + filetype);
 
-    res.download(filePath);
+    res.download(filePath, function(err) {
+        if(err) {
+            console.log("error");
+        } else {
+            console.log(id + filetype + " file download complete.")
+        }
+    });
     //next();    
 }
 
