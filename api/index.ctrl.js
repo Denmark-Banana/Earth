@@ -1,9 +1,14 @@
 var walk = require('walkdir');
 var propertiesReader = require('properties-reader');
 var path = require('path');
+const fs = require('fs');
+
 var properties = propertiesReader('server.properties');
 
+
+
 function downloadAPI (req, res) {
+
     var dir_loc = properties.get('dir.location');
     var category = req.params.category;
     var id = req.params.id;
@@ -11,14 +16,19 @@ function downloadAPI (req, res) {
 
     var filePath = path.join(dir_loc, category, id, id + filetype);
 
-    res.download(filePath, function(err) {
-        if(err) {
-            console.log("error");
-        } else {
-            console.log(id + filetype + " file download complete.")
-        }
-    });
-    //next();    
+    if(fs.existsSync(filePath)) {
+        res.download(filePath, function(err) {
+            if(err) {
+                console.log("error occured.");
+            } else {
+                console.log(id + filetype + " file download complete.")
+            }
+        });
+    }
+    else
+        res.status(204).end();
+
+
 }
 
 function scanFolderAPI (req, res) {
