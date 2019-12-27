@@ -1,20 +1,21 @@
-var walk = require('walkdir');
-var propertiesReader = require('properties-reader');
-var path = require('path');
+const walk = require('walkdir');
+const propertiesReader = require('properties-reader');
+const path = require('path');
 const fs = require('fs');
+const dirTree = require('directory-tree');
 
-var properties = propertiesReader('server.properties');
+const properties = propertiesReader('server.properties');
 
 
 
 function downloadAPI (req, res) {
 
-    var dir_loc = properties.get('dir.location');
-    var category = req.params.category;
-    var id = req.params.id;
-    var filetype = ".pdf";
+    const dir_loc = properties.get('dir.location');
+    const category = req.params.category;
+    const id = req.params.id;
+    const filetype = ".pdf";
 
-    var filePath = path.join(dir_loc, category, id, id + filetype);
+    const filePath = path.join(dir_loc, category, id, id + filetype);
 
     if(fs.existsSync(filePath)) {
         res.download(filePath, function(err) {
@@ -32,27 +33,37 @@ function downloadAPI (req, res) {
 }
 
 function scanFolderAPI (req, res) {
-    res.status(200).json(
-        {
-            "success" : true
-        }
-    )
+    const startingPath = properties.get('dir.location');
     
-// //async with path callback 
-// var startingPath = './pdf';
+    if(fs.existsSync(startingPath)) {
+
+        const filteredTree = dirTree(startingPath, 
+            { extensions: /\.(pdf)$/ }, null,
+            (item, PATH, stats) => {
+                //console.log(item);
+            }
+        );
+        res.status(200).json(
+            {   
+                filteredTree    
+            }
+        )
+    }
+    else {
+        res.status(404).end();
+    }
+
+
 
 // walk(startingPath, function(path, stat) {
-//   console.log('found: ', path);
+//     console.log('found: ', path);
 // });
 
-// //use async emitter to capture more events
-// var emitter = walk(startingPath);
-
+// //filtering
+// const emitter = walk(startingPath);
 // emitter.on('file', function(filename, stat) {
-//   console.log('file from emitter: ', filename);
+//     console.log('file from emitter: ', filename);
 // });
-
-
 // //sync with callback
 // walk.sync(startingPath, function(path, stat) {
 //   console.log('found sync:', path);

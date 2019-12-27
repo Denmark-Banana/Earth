@@ -27,18 +27,18 @@ describe('GET /api/download는', () => {
                 }
             });
     });    
-    it('파라미터가 부족할때 404를 반환한다. ', (done) => {
-        request(app)
-            .get('/api/download/A')
-            .expect(404)
-            .end((err, res) => {
-                if (err) {
-                    done(err);
-                } else {
-                    done();
-                }
-            });
-    }); 
+    // it('파라미터가 부족할때 404를 반환한다. ', (done) => {
+    //     request(app)
+    //         .get('/api/download/A')
+    //         .expect(404)
+    //         .end((err, res) => {
+    //             if (err) {
+    //                 done(err);
+    //             } else {
+    //                 done();
+    //             }
+    //         });
+    // }); 
 });
 
 
