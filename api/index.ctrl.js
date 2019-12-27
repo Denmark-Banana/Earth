@@ -1,8 +1,12 @@
 var walk = require('walkdir');
+var propertiesReader = require('properties-reader');
+var path = require('path');
+var properties = propertiesReader('server.properties');
 
 function downloadAPI (req, res) {
-    var filePath = "C:/Users/user/git/earth/pdf/1/manual1-1.pdf"; 
-    //properties파일을 만들어서 그 경로에 있는 폴더를 작성
+
+    var filePath = path.join(properties.get('file.location'),"/1/manual1-1.pdf");
+
     res.download(filePath);
     //next();    
 }
