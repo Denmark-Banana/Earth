@@ -11,11 +11,4 @@ router.get('/', function(req, res, next) {
 router.get('/test', userController.testAPI);
 router.post('/test', userController.postTestAPI);
 
-// router.get('/download', function (req, res, next) {
-//     var filePath = "C:/Users/user/git/earth/pdf/1/manual1-1.pdf"; 
-//     //properties파일을 만들어서 그 경로에 있는 폴더를 작성
-//     res.download(filePath);
-//     next();    
-// });
-
 module.exports = router;

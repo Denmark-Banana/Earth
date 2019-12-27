@@ -1,5 +1,3 @@
-//node_modules/.bin/mocha ./app.spec.js
-
 const app = require('./app');
 const request = require('supertest');
 
