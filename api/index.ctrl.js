@@ -1,11 +1,9 @@
-const walk = require('walkdir');
 const propertiesReader = require('properties-reader');
 const path = require('path');
 const fs = require('fs');
 const dirTree = require('directory-tree');
 
 const properties = propertiesReader('server.properties');
-
 
 
 function downloadAPI (req, res) {
@@ -26,8 +24,10 @@ function downloadAPI (req, res) {
             }
         });
     }
-    else
+    else {
+        console.log("There are no files in that path");
         res.status(204).end();
+    }
 
 
 }
@@ -52,31 +52,6 @@ function scanFolderAPI (req, res) {
     else {
         res.status(404).end();
     }
-
-
-
-// walk(startingPath, function(path, stat) {
-//     console.log('found: ', path);
-// });
-
-// //filtering
-// const emitter = walk(startingPath);
-// emitter.on('file', function(filename, stat) {
-//     console.log('file from emitter: ', filename);
-// });
-// //sync with callback
-// walk.sync(startingPath, function(path, stat) {
-//   console.log('found sync:', path);
-// });
-
-// //sync just need paths
-// var paths = walk.sync(startingPath);
-// console.log('found paths sync: ', paths);
-
-// //async await/promise!
-// let result = await walk.async(startingPath,{return_object:true})
-// result['path'] = {statObject}
-    //next();    
 }
 
 module.exports = { downloadAPI, scanFolderAPI }
