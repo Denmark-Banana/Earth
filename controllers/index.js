@@ -1,11 +1,3 @@
-function basicAPI (req, res) {
-    res.status(200).json(
-        {
-            "success" : true
-        }
-    )
-}
-
 function testAPI (req, res) {
     res.status(200).json(
         {
@@ -24,7 +16,6 @@ function postTestAPI (req, res) {
 }
 
 module.exports = {
-    basicAPI: basicAPI,
     testAPI: testAPI,
     postTestAPI: postTestAPI,
 }

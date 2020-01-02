@@ -3,3 +3,9 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  if user
+    p #{user.name} 님 환영합니다.  
+  p
+    a(href="/signin") 로그인 
+  p
+    a(href="/signup") 회원가입

@@ -3,21 +3,51 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const passport = require('passport');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./api/index');
 
+
 const app = express();
+require('./passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+mongoose.connect('mongodb://localhost:27017/sample', {
+    useNewUrlParser: true
+});
+
+//db Configuration
+const db = mongoose.connection;
+
+const handleOpen = () => console.log('-> connected to DB');
+const handleError = (err) => console.log(' Error on DB Connection : ${err}')
+
+db.once('open', handleOpen);
+db.on('error', handleError);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ 
+    secret: '@#@$MYSIGN#@$#$',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
