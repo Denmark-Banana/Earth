@@ -19,11 +19,10 @@ require('./passport')(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//db Configuration
 mongoose.connect('mongodb://localhost:27017/sample', {
     useNewUrlParser: true
 });
-
-//db Configuration
 const db = mongoose.connection;
 
 const handleOpen = () => console.log('-> connected to DB');
