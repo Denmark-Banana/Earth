@@ -14,10 +14,12 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "properties-reader": "^0.3.1"
+    "properties-reader": "^0.3.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "mocha": "^6.2.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "swagger-ui-express": "^4.1.2"
   }
 }

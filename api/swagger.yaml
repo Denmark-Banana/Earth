@@ -1,0 +1,46 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: DSME Smart Manual Server API
+  description: Manual Management API Specification
+
+schemes:
+  - http
+host: localhost:3300
+basePath: /api
+
+tags:
+  name: Scan
+    description: Directory Scan
+
+  name: Download
+    description: Download pdf file
+
+paths:
+  /scan:
+    get:
+      summary: 
+      tags: [Scan]
+      description: API to return directoy structure in JSON format
+      responses:
+        200:
+          description: status code 200
+          content: application/json:
+          schema:
+            type: object
+            properties: 
+              filteredTree:
+                type: object
+                properties:
+                  path: string
+                  name: string
+                  children: array
+  /download/{depth1}/{depth2}:
+    get:
+      tags: [Download]
+      description: Download pdf file
+      responses:
+        200:
+          descripiton: status code 200
+          content: application/pdf:
