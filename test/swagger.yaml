@@ -25,8 +25,8 @@ paths:
       description: Provide directory structure information and .pdf file path information.
       responses:
         200:
-          description: status code 200
-          content: application/json:
+          description: Success
+          content: application/json
           schema:
             type: object
             properties: 
@@ -37,11 +37,26 @@ paths:
                   name: string
                   children: array
 
-  # /api/download/{depth1}/{depth2}:
-  #   get:
-  #     tags: [Download]
-  #     description: Download pdf file
-  #     responses:
-  #       200:
-  #         descripiton: status code 200
-  #         content: application/pdf:
+
+  /api/download/{depth1}/{depth2}:
+    get:
+      summary: Download .pdf file
+      tags: [Download]
+      description: Provide .pdf file by path information. Ex) depth1 = A, depth2 = engineA
+      parameters:
+        - name: depth1
+          in: path
+          description: first depth
+          required: true
+          type: string
+        - name: depth2
+          in: path
+          description: second depth
+          required: true
+          type: string
+
+      responses:
+        200:
+          descripiton: Success
+          content: application/pdf
+            

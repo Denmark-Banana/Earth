@@ -9,18 +9,20 @@ const properties = propertiesReader('server.properties');
 function downloadAPI (req, res) {
 
     const dir_loc = properties.get('dir.location');
-    const category = req.params.category;
-    const id = req.params.id;
+    // const depth1 = req.params.depth1;
+    // const depth2 = req.params.depth2;
+    const depth1 = req.params.depth1;
+    const depth2 = req.params.depth2;
     const filetype = ".pdf";
 
-    const filePath = path.join(dir_loc, category, id, id + filetype);
+    const filePath = path.join(dir_loc, depth1, depth2, depth2 + filetype);
 
     if(fs.existsSync(filePath)) {
         res.download(filePath, function(err) {
             if(err) {
                 console.log("error occured.");
             } else {
-                console.log(id + filetype + " file download complete.")
+                console.log(depth2 + filetype + " file download complete.")
             }
         });
     }

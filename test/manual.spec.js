@@ -1,7 +1,7 @@
 const app = require('../app');
 const request = require('supertest');
 
-describe('GET /api/download는', () => {
+describe('GET /api/download/{depth1}/{depth2}는', () => {
     it('다운로드한 파일을 리턴한다.', (done) => {
         request(app)
             .get('/api/download/A/engineA')
