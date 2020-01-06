@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "mocha ./api/index.spec.js",
+    "test": "mocha ./test/manual.spec.js",
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
