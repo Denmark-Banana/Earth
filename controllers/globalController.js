@@ -1,10 +1,4 @@
-function basicAPI (req, res) {
-    res.status(200).json(
-        {
-            "success" : true
-        }
-    )
-}
+function home (req, res) { res.render('index', { title: 'Express' }) };
 
 function testAPI (req, res) {
     res.status(200).json(
@@ -24,7 +18,7 @@ function postTestAPI (req, res) {
 }
 
 module.exports = {
-    basicAPI: basicAPI,
+    home: home,
     testAPI: testAPI,
     postTestAPI: postTestAPI,
 }

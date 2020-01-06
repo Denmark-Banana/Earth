@@ -42,10 +42,10 @@ describe('GET /api/download는', () => {
 });
 
 
-describe('GET /api/scan은', () => {
+describe('GET /api/directory은', () => {
     it('json을 리턴한다.', (done) => {
         request(app)
-            .get('/api/scan')
+            .get('/api/directory')
             .expect('Content-Type', /json/)
             .expect(200)
             .end((err, res) => {

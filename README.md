@@ -1,7 +1,10 @@
-# EARTH Project [2019.12.23]
-## NodeJS API Server with TDD
-
-Node.js, Npm, Express-Generator
-
+## NodeJS API Server
+Node.js, Express
 ## [TDD Library] 
 mocha, should, superTest
+## [API Document]
+swagger2.0
+
+
+
+### server.properties에 directory 경로를 입력해주세요.

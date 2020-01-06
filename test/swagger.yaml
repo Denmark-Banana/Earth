@@ -7,22 +7,22 @@ info:
 
 schemes:
   - http
-host: localhost:3300
-basePath: /api
+#host: localhost:3300
+basePath: /
 
 tags:
-  name: Scan
+  name: directory
     description: Directory Scan
 
   name: Download
     description: Download pdf file
 
 paths:
-  /scan:
+  /api/directory:
     get:
-      summary: 
-      tags: [Scan]
-      description: API to return directoy structure in JSON format
+      summary: return directoy structure in JSON format
+      tags: [directory]
+      description: Provide directory structure information and .pdf file path information.
       responses:
         200:
           description: status code 200
@@ -30,17 +30,18 @@ paths:
           schema:
             type: object
             properties: 
-              filteredTree:
+              DirectoryTree:
                 type: object
                 properties:
                   path: string
                   name: string
                   children: array
-  /download/{depth1}/{depth2}:
-    get:
-      tags: [Download]
-      description: Download pdf file
-      responses:
-        200:
-          descripiton: status code 200
-          content: application/pdf:
+
+  # /api/download/{depth1}/{depth2}:
+  #   get:
+  #     tags: [Download]
+  #     description: Download pdf file
+  #     responses:
+  #       200:
+  #         descripiton: status code 200
+  #         content: application/pdf:

@@ -32,26 +32,23 @@ function downloadAPI (req, res) {
 
 }
 
-function scanFolderAPI (req, res) {
+function scanDirectoryAPI (req, res) {
     const startingPath = properties.get('dir.location');
     
     if(fs.existsSync(startingPath)) {
 
-        const filteredTree = dirTree(startingPath, 
+        const DirectoryTree = dirTree(startingPath, 
             { extensions: /\.(pdf)$/ }, null,
             (item, PATH, stats) => {
                 //console.log(item);
             }
         );
-        res.status(200).json(
-            {   
-                filteredTree    
-            }
-        )
+        res.status(200).json({ DirectoryTree });
     }
     else {
-        res.status(404).end();
+        console.log("There are no files in that path");
+        res.status(204).end();
     }
 }
 
-module.exports = { downloadAPI, scanFolderAPI }
+module.exports = { downloadAPI, scanDirectoryAPI }
