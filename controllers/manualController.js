@@ -34,6 +34,45 @@ function downloadAPI (req, res) {
 
 }
 
+function removeKeys(obj, keys) {
+    for (var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            switch(typeof(obj[prop])) {
+                case 'object':
+                    if(keys.indexOf(prop) > -1) {
+                        delete obj[prop];
+                    } else {
+                        removeKeys(obj[prop], keys);
+                    }
+                    break;
+              default:
+                    if(keys.indexOf(prop) > -1) {
+                        delete obj[prop];
+                    }
+                    break;
+            }
+        }
+    }
+}
+
+var traverse = function(o, fn) {
+    for (var i in o) {
+      fn.apply(this,[i,o[i]]);  
+      if (o[i] !== null && typeof(o[i])=="object") {
+        traverse(o[i], fn);
+      }
+    }
+}
+
+function splitPath(obj, stPath) {
+    console.log(obj);
+    for(var key in obj) {
+        var objPath = obj(key).path;
+        var index = objPath.indexOf(stPath);
+        obj(key).path = objPath.substr(index, objPath.length);
+    }
+}
+
 function scanDirectoryAPI (req, res) {
     const startingPath = properties.get('dir.location');
     
@@ -45,6 +84,7 @@ function scanDirectoryAPI (req, res) {
                 //console.log(item);
             }
         );
+        removeKeys(DirectoryTree, 'size');
         res.status(200).json({ DirectoryTree });
     }
     else {
