@@ -9,21 +9,17 @@ const pathDir = require('../path_dir');
 
 
 function downloadAPI(req, res) {
-
-    // const depth1 = req.params.depth1;
-    // const depth2 = req.params.depth2;
-    const depth1 = req.params.depth1;
-    const depth2 = req.params.depth2;
+    const depth = req.query.querypath;
     const filetype = ".pdf";
 
-    const filePath = path.join(ROOTPATH, depth1, depth2, depth2 + filetype);
+    const filePath = path.join(ROOTPATH, depth + filetype);
 
     if (fs.existsSync(filePath)) {
         res.download(filePath, function(err) {
             if (err) {
                 console.log("error occured.");
             } else {
-                console.log(depth2 + filetype + " file download complete.")
+                console.log("file download complete.")
             }
         });
     } else {

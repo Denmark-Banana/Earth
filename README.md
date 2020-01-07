@@ -5,6 +5,5 @@ mocha, should, superTest
 ## [API Document]
 swagger2.0
 
-
-
-### server.properties에 directory 경로를 입력해주세요.
+### config
+server.properties에 directory 경로를 입력해주세요.
