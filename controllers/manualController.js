@@ -34,20 +34,25 @@ function downloadAPI (req, res) {
 
 }
 
-function removeKeys(obj, keys) {
+function renamePath(obj, keys) {
+    const startingPath = properties.get('dir.location');
     for (var prop in obj) {
         if(obj.hasOwnProperty(prop)) {
             switch(typeof(obj[prop])) {
                 case 'object':
                     if(keys.indexOf(prop) > -1) {
-                        delete obj[prop];
+                        console.log('first: ' + obj[prop]);
+                        //delete obj[prop];
                     } else {
-                        removeKeys(obj[prop], keys);
+                        renamePath(obj[prop], keys);
                     }
                     break;
               default:
                     if(keys.indexOf(prop) > -1) {
-                        delete obj[prop];
+                        obj[prop] = splitPath(obj[prop], startingPath);
+                        console.log('second: ' + obj[prop]);
+                        obj[prop] = "";
+                        //delete obj[prop];
                     }
                     break;
             }
@@ -55,22 +60,10 @@ function removeKeys(obj, keys) {
     }
 }
 
-var traverse = function(o, fn) {
-    for (var i in o) {
-      fn.apply(this,[i,o[i]]);  
-      if (o[i] !== null && typeof(o[i])=="object") {
-        traverse(o[i], fn);
-      }
-    }
-}
-
 function splitPath(obj, stPath) {
-    console.log(obj);
-    for(var key in obj) {
-        var objPath = obj(key).path;
-        var index = objPath.indexOf(stPath);
-        obj(key).path = objPath.substr(index, objPath.length);
-    }
+    var index = obj.indexOf(stPath);
+    obj = obj.substr(index, obj.length);
+    return obj;
 }
 
 function scanDirectoryAPI (req, res) {
@@ -84,7 +77,7 @@ function scanDirectoryAPI (req, res) {
                 //console.log(item);
             }
         );
-        removeKeys(DirectoryTree, 'size');
+        renamePath(DirectoryTree, 'path');
         res.status(200).json({ DirectoryTree });
     }
     else {
