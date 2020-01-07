@@ -79,7 +79,7 @@ function scanDirectoryAPI (req, res) {
     if(fs.existsSync(startingPath)) {
 
         const DirectoryTree = dirTree(startingPath, 
-            { extensions: /\.(pdf)$/ }, null,
+            { extensions: /\.(pdf)$/, normalizePath: true }, null,
             (item, PATH, stats) => {
                 //console.log(item);
             }
