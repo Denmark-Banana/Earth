@@ -9,10 +9,8 @@ const pathDir = require('../path_dir');
 
 
 function downloadAPI(req, res) {
-    const depth = req.query.querypath;
-    const filetype = ".pdf";
-
-    const filePath = path.join(ROOTPATH, depth + filetype);
+    const querypath = req.query.querypath;
+    const filePath = path.join(ROOTPATH, querypath);
 
     if (fs.existsSync(filePath)) {
         res.download(filePath, function(err) {

@@ -38,20 +38,15 @@ paths:
                   children: array
 
 
-  /api/download/{depth1}/{depth2}:
+  /api/download:
     get:
       summary: Download .pdf file
       tags: [Download]
-      description: Provide .pdf file by path information. Ex) depth1 = A, depth2 = engineA
+      description: Provide .pdf file by path information. Ex) filepath = A/engineA/engineA.pdf
       parameters:
-        - name: depth1
-          in: path
-          description: first depth
-          required: true
-          type: string
-        - name: depth2
-          in: path
-          description: second depth
+        - name: filepath
+          in: query
+          description: filepath
           required: true
           type: string
 
