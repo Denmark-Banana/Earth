@@ -9,7 +9,7 @@ const pathDir = require('../path_dir');
 
 
 function downloadAPI(req, res) {
-    const queryPath = req.query.queryPath;
+    const queryPath = req.query.path;
     const filePath = path.join(ROOTPATH, queryPath);
 
     if (fs.existsSync(filePath)) {

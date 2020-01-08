@@ -42,9 +42,9 @@ paths:
     get:
       summary: Download .pdf file
       tags: [Download]
-      description: Provide .pdf file by path information. Ex) queryPath = A/engineA/engineA.pdf
+      description: Provide .pdf file by path information. Ex) path = A/engineA/engineA.pdf
       parameters:
-        - name: queryPath
+        - name: path
           in: query
           required: true
           type: string
