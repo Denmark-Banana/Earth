@@ -17,6 +17,7 @@ node --version
 ### pm2 설치 유무 확인
 npm install -g pm2 : pm2 globally 설치
 pm2 start app.js --name "example" : 프로세스 등록 및 시작
+pm2 start npm -- start : 프로세스 등록 및 시작2
 pm2 list : 프로세스 리스트 확인
 pm2 show example : 프로세스 정보 확인
 pm2 restart example : 프로세스 재시작 
