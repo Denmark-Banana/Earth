@@ -1,21 +1,18 @@
 const path = require('path');
 const fs = require('fs');
-const dirTree = require('directory-tree');
-
+const directory = require('../models/Directory');
 const dotenv = require('dotenv')
 dotenv.config();
 const ROOTPATH = process.env.DIR_LOCATION || 'root';
-const pathDir = require('../path_dir');
 
 
 function downloadAPI(req, res) {
     const queryPath = req.query.path;
-    if(typeof(queryPath) !== 'string') {
+    if (typeof(queryPath) !== 'string') {
         console.log("path is not string in the query statement.");
         res.status(400).end();
     }
     const filePath = path.join(ROOTPATH, queryPath);
-
     if (fs.existsSync(filePath)) {
         res.download(filePath, function(err) {
             if (err) {
@@ -27,24 +24,20 @@ function downloadAPI(req, res) {
         });
     } else {
         console.log("There are no files in that path.");
-        res.status(204).end();
+        res.status(404).end();
     }
 }
 
-
 function scanDirectoryAPI(req, res) {
     if (fs.existsSync(ROOTPATH)) {
+        var dirObject = directory.scan();
+        const PdfTotalCount = dirObject.PdfTotalCount;
+        const DirectoryTree = dirObject.JsonTree;
 
-        const DirectoryTree = dirTree(ROOTPATH, { extensions: /\.(pdf)$/, normalizePath: true }, null,
-            (item, PATH, stats) => {
-                //console.log(item);
-            }
-        );
-        var PdfTotalCount = pathDir.splitPathofJSON(DirectoryTree, 'path');
         res.status(200).json({ PdfTotalCount, DirectoryTree });
     } else {
         console.log("There are no files in that path");
-        res.status(204).end();
+        res.status(404).end();
     }
 }
 
