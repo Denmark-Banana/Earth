@@ -1,10 +1,10 @@
-const propertiesReader = require('properties-reader');
 const path = require('path');
 const fs = require('fs');
 const dirTree = require('directory-tree');
 
-const properties = propertiesReader('server.properties');
-const ROOTPATH = properties.get('dir.location');
+const dotenv = require('dotenv')
+dotenv.config();
+const ROOTPATH = process.env.DIR_LOCATION || 'root';
 const pathDir = require('../path_dir');
 
 
@@ -40,8 +40,8 @@ function scanDirectoryAPI(req, res) {
                 //console.log(item);
             }
         );
-        pathDir.minimalPath(DirectoryTree, 'path', ROOTPATH);
-        res.status(200).json({ DirectoryTree });
+        var PdfTotalCount = pathDir.splitPathofJSON(DirectoryTree, 'path');
+        res.status(200).json({ PdfTotalCount, DirectoryTree });
     } else {
         console.log("There are no files in that path");
         res.status(204).end();

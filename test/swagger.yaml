@@ -11,7 +11,7 @@ schemes:
 basePath: /
 
 tags:
-  name: directory
+  name: Directory
     description: Directory Scan
 
   name: Download
@@ -21,7 +21,7 @@ paths:
   /api/directory:
     get:
       summary: return directoy structure in JSON format
-      tags: [directory]
+      tags: [Directory]
       description: Provide directory structure information and .pdf file path information.
       responses:
         200:
@@ -30,12 +30,16 @@ paths:
           schema:
             type: object
             properties: 
+              PdfTotalCount:
+                type: integer
               DirectoryTree:
                 type: object
                 properties:
                   path: string
                   name: string
                   children: array
+
+              
 
 
   /api/download:

@@ -1,30 +1,42 @@
-function minimalPath(obj, keys, rootPath) {
-    for (var prop in obj) {
+const dotenv = require('dotenv')
+dotenv.config();
+const ROOTPATH = process.env.DIR_LOCATION || 'root';
+var pdfTotalcount = 0;
+
+function splitPathofJSON(obj, keys) {
+    pdfTotalcount = 0;
+    traversalJSON(obj, keys, splitPath);
+    return pdfTotalcount;
+}
+
+function countPdfofJSON(obj, keys) {
+    traversalJSON(obj, keys, countPdf);
+}
+
+function traversalJSON(obj, keys) {
+    for(var prop in obj) {
         if (obj.hasOwnProperty(prop)) {
             switch (typeof(obj[prop])) {
                 case 'object':
-                    if (keys.indexOf(prop) > -1) {
-                        obj[prop] = splitPath(obj[prop], rootPath);
-                        //delete obj[prop];
-                    } else {
-                        minimalPath(obj[prop], keys, rootPath);
-                    }
+                    traversalJSON(obj[prop], keys);
                     break;
                 default:
                     if (keys.indexOf(prop) > -1) {
-                        obj[prop] = splitPath(obj[prop], rootPath);
-                        //delete obj[prop];
+                        obj[prop] = splitPath(obj[prop]);
                     }
-                    break;
+                    if (("extension").indexOf(prop) > -1 && obj[prop] === ".pdf") {
+                        pdfTotalcount++;
+                    }
+                    break;               
             }
         }
     }
 }
 
-function splitPath(obj, rootPath) {
-    var index = obj.indexOf(rootPath);
+function splitPath(obj) {
+    var index = obj.indexOf(ROOTPATH);
     if (index !== -1) {
-        var startindex = index + rootPath.length + 1;
+        var startindex = index + ROOTPATH.length + 1;
         obj = obj.substr(startindex, obj.length);
     }
     if (obj === "")
@@ -33,7 +45,13 @@ function splitPath(obj, rootPath) {
     return obj;
 }
 
+function countPdf(obj) {
+    //...?
+
+
+}
+
 module.exports = {
-    minimalPath: minimalPath,
-    splitPath: splitPath,
+    splitPathofJSON: splitPathofJSON,
+    countPdfofJSON: countPdfofJSON
 }
