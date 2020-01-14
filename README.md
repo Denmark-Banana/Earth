@@ -28,3 +28,8 @@ pm2 kill example : 프로세스 강제 종료 <br>
 pm2 logs example : 로그 확인 <br> 
 pm2 flush : 로그파일 삭제 <br> 
 pm2 monit : 모니터링 모드 <br> 
+pm2 startup : 부팅 시 자동 재시작 <br>
+pm2 unstartup systemd : 부팅 시 자동 재시작 해제 <br>
+
+
+### package

@@ -10,7 +10,7 @@ schemes:
 #host: localhost:3300
 basePath: /
 
-tags:
+tags: 
   name: Directory
     description: Directory Scan
 
@@ -25,7 +25,7 @@ paths:
       description: Provide directory structure information and .pdf file path information.
       responses:
         200:
-          description: Success
+          description: Successful operation
           content: application/json
           schema:
             type: object
@@ -38,6 +38,8 @@ paths:
                   path: string
                   name: string
                   children: array
+        404:
+          description: Directory not found
 
               
 
@@ -52,9 +54,24 @@ paths:
           in: query
           required: true
           type: string
-
+          description: The file path for download
       responses:
         200:
-          descripiton: Success
+          description: Successful operation
           content: application/pdf
+          schema:
+            type: object
+            properties: 
+              PdfTotalCount:
+                type: integer
+              DirectoryTree:
+                type: object
+                properties:
+                  path: string
+                  name: string
+                  children: array
+        400: 
+          description: Invalid path supplied
+        404:
+          description: File not found
             

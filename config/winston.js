@@ -10,12 +10,12 @@ const myformat = winston.format.printf(
 const logger = winston.createLogger({
     level: 'debug',
     transports: [
-        new winston.transports.DailyRotateFile({
-            filename: `${appRoot}/logs/test.log`,
-            zippedArchive: false,
-            format: myformat,
-            handleExceptions: true
-        }),
+        // new winston.transports.DailyRotateFile({
+        //     filename: `${appRoot}/logs/test.log`,
+        //     zippedArchive: false,
+        //     format: myformat,
+        //     handleExceptions: true
+        // }),
         new winston.transports.Console({
             format: myformat,
             handleExceptions: true,

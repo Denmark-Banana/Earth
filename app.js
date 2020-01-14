@@ -10,7 +10,7 @@ const manualRouter = require('./routes/manualRoutes');
 
 const yamlLoader = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = yamlLoader.load('./test/swagger.yaml');
+const swaggerDocument = yamlLoader.load('./swagger.yaml');
 
 const app = express();
 

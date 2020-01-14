@@ -2,9 +2,24 @@
   "name": "earth",
   "version": "0.0.0",
   "private": true,
+  "bin": {
+    "app": "./bin/www"
+  },
   "scripts": {
     "test": "mocha ./test/manual.spec.js",
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "pkg . --out-path dist"
+  },
+  "pkg": {
+    "assets": [
+      "views/**/*",
+      "public/**/*",
+      "node_modules/swagger-ui-dist/**/*.css",
+      "node_modules/swagger-ui-dist/**/*.png"
+    ],
+    "targets": [
+      "node12"
+    ]
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
@@ -23,6 +38,7 @@
   },
   "devDependencies": {
     "mocha": "^6.2.2",
+    "pkg": "^4.4.2",
     "supertest": "^4.0.2",
     "swagger-ui-express": "^4.1.2"
   }
