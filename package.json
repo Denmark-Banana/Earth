@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "mocha ./test/manual.spec.js",
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "build": "pkg . --out-path dist"
   },
   "pkg": {
@@ -18,7 +18,7 @@
       "node_modules/swagger-ui-dist/**/*.png"
     ],
     "targets": [
-      "node12"
+      "node12-linux-x64"
     ]
   },
   "dependencies": {

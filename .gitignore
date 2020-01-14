@@ -4,6 +4,6 @@ logs
 
 .DS_Store
 
-*.sh
-
 dist
+
+*.tar
