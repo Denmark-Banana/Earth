@@ -33,3 +33,9 @@ pm2 unstartup systemd : 부팅 시 자동 재시작 해제 <br>
 
 
 ### package
+> ./pkg_earth.sh
+1. project를 build하여 dist에 위치
+2. env, swagger.yaml, README등을 dist에 위치
+3. dist.tar로 압축
+4. test server에 파일 전송
+
