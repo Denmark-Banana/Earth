@@ -62,14 +62,8 @@ paths:
           schema:
             type: object
             properties: 
-              PdfTotalCount:
-                type: integer
-              DirectoryTree:
+              Download file:
                 type: object
-                properties:
-                  path: string
-                  name: string
-                  children: array
         400: 
           description: Invalid path supplied
         404:
