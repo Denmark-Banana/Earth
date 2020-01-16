@@ -1,5 +1,5 @@
 const request = require('request');
-const url = 'https://192.168.7.77:8030/ui';
+const url = 'https://192.168.7.198:8030/ui';
 
 
 function login() {
@@ -28,23 +28,29 @@ function login() {
 }
 function getLatest (token) {
     const latestOption = {
+        headers: {
+            authzserviceid: 'Ship',
+            authorization: token
+        },
         uri: url + '/devices/telemetry/getLatest?',
         method: 'GET',
         qs: {
-            serviceId: 'ship',
-            deviceId: 'HVAC',
-            sensorNodeId: '*',
+            serviceId: 'Ship',
+            deviceId: 'LBTS',
+            sensorNodeId: 'PRS.PV',
+            //sensorNodeId: 'FGS.PV',
             authorization: 'bearer ' + token
-        },
+        },  
         rejectUnauthorized : false
     };
     request.get(latestOption, function(error, response, body) {
-        if(error) 
-            console.log(error);
+        const bodyObject = JSON.parse(body);
+        if(bodyObject.error)
+            console.log(bodyObject.error);
         else {
-            const bodyObject = JSON.parse(body);
             console.log(bodyObject);
-        }    
+            console.log(bodyObject.rows.sensorNodes);
+        }
     });
 }
 login();

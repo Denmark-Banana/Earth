@@ -13,7 +13,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = yamlLoader.load('./swagger.yaml');
 
 const app = express();
-const requestTest = require('./requestTest');
+const requestTest = require('./test/requestTest');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
