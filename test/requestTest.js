@@ -53,4 +53,4 @@ function getLatest (token) {
         }
     });
 }
-login();
+//login();

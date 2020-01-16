@@ -7,6 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('earth:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+var path = require('path');
+const ISHTTPS = false;
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +24,16 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+if(ISHTTPS) {
+  const keypath = path.join(__dirname, '../keys/private.pem');
+  const certpath = path.join(__dirname, '../keys/public.pem');
+  var options = {
+      key: fs.readFileSync(keypath),
+      cert: fs.readFileSync(certpath)
+  };
+  server = https.createServer( options, app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.
