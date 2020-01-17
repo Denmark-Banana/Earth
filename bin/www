@@ -26,8 +26,8 @@ app.set('port', port);
 var server = http.createServer(app);
 
 if(ISHTTPS) {
-  const keypath = path.join(__dirname, '../keys/private.pem');
-  const certpath = path.join(__dirname, '../keys/public.pem');
+  const keypath = path.join(__dirname, '../keys/cert.key');
+  const certpath = path.join(__dirname, '../keys/cert.crt');
   var options = {
       key: fs.readFileSync(keypath),
       cert: fs.readFileSync(certpath)
