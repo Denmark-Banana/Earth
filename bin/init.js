@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+//var app = require('../app');
+import app from '../app';
 var debug = require('debug')('earth:server');
 var http = require('http');
 var https = require('https');

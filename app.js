@@ -1,5 +1,6 @@
-const createError = require('http-errors');
-const express = require('express');
+import createError from 'http-errors';
+import express from 'express';
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -46,4 +47,4 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
+export default app;
