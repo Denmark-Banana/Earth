@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "mocha ./test/manual.spec.js",
-    "start": "nodemon --exec babel-node ./bin/init.js --delay 2",
+    "start": "nodemon --exec babel-node ./bin/www",
     "build": "pkg . --out-path dist"
   },
   "pkg": {
@@ -39,9 +39,6 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/node": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
     "mocha": "^6.2.2",
     "pkg": "^4.4.2",
     "supertest": "^4.0.2",

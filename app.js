@@ -1,5 +1,5 @@
-import createError from 'http-errors';
-import express from 'express';
+const createError = require('http-errors');
+const express = require('express');
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -47,4 +47,4 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-export default app;
+module.exports = app;
