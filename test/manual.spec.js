@@ -1,10 +1,10 @@
 const app = require('../app');
 const request = require('supertest');
 
-describe('GET /api/download/{depth1}/{depth2}는', () => {
+describe('GET /api/download는', () => {
     it('다운로드한 파일을 리턴한다.', (done) => {
         request(app)
-            .get('/api/download/A/engineA')
+            .get('/api/download?path=A/engineA/engineA.pdf')
             .expect('Content-Type', 'application/pdf')
             .expect(200)
             .end((err, res) => {
@@ -15,10 +15,10 @@ describe('GET /api/download/{depth1}/{depth2}는', () => {
                 }
             });
     });
-    it('파일이 없을때 204를 반환한다. ', (done) => {
+    it('파일이 없을때 404를 반환한다. ', (done) => {
         request(app)
-            .get('/api/download/B/uiB')
-            .expect(204)
+            .get('/api/download?path=B/uiB/uiB.pdf')
+            .expect(404)
             .end((err, res) => {
                 if (err) {
                     done(err);
@@ -27,18 +27,6 @@ describe('GET /api/download/{depth1}/{depth2}는', () => {
                 }
             });
     });    
-    // it('파라미터가 부족할때 404를 반환한다. ', (done) => {
-    //     request(app)
-    //         .get('/api/download/A')
-    //         .expect(404)
-    //         .end((err, res) => {
-    //             if (err) {
-    //                 done(err);
-    //             } else {
-    //                 done();
-    //             }
-    //         });
-    // }); 
 });
 
 
